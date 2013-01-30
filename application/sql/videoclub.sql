@@ -13,7 +13,13 @@ create index idx_socios_usuario on socios (usuario);
 drop table peliculas cascade;
 
 create table peliculas (
-  id     bigserial    constraint pk_peliculas primary key,
-  titulo varchar(100) not null
+  id          bigserial    constraint pk_peliculas primary key,
+  titulo      varchar(100) not null,
+  precio      numeric(6,2) not null,
+  genero      varchar(20) ,
+  director    varchar(50),
+  duracion    numeric(3),
+  descripcion varchar (500),
+  anio        numeric(4) not null
 );
 
