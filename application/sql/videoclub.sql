@@ -28,6 +28,11 @@ create table peliculas (
   anio        numeric(4) not null
 );
 
+insert into peliculas (titulo, precio, genero, director, duracion, descripcion, anio) 
+    values('El ataque de los tomates asesinos', 1, 'terror', 'Walter Simons', 95, 'Cuando los tomates cobran vida ...', 1979);
+  insert into peliculas (titulo, precio, genero, director, duracion, descripcion, anio) 
+    values('El ataque de los tomates asesinos', 8, 'western', 'Walter Simons', 145, 'Balas en contra de la fisica que ...', 1982);
+
 create index idx_peliculas_titulo on peliculas (titulo);
 create index idx_peliculas_anio on peliculas (anio);
 
