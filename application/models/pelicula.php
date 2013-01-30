@@ -1,5 +1,7 @@
 <?php
+
 // id | titulo | precio | genero | director | duracion | descripcion | anio
+
 class Pelicula extends CI_Model{
 
   function obtener_todos($cond = '', $valores = array(),
