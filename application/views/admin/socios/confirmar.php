@@ -7,8 +7,8 @@
 		</tr>
 		<tr>
 			<td>
-				<?= $baja = $id; ?>
-				<?= form_submit('baja', 'Si', $baja); ?>
+			  <?= form_hidden('idsocio', $id); ?>
+				<?= form_submit('baja', 'Si', $id); ?>
 			</td>
 			<td>
 				<?= form_submit(array('name' 			 => 'cancelar',

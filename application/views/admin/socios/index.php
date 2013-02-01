@@ -16,6 +16,6 @@
     <?php endforeach; ?>
   </tbody>
 </table>
-<?= form_open('socios/index') ?>
+<?= form_open('admin/socios/insertar') ?>
   <?= form_submit('anadir', 'Añadir Socio') ?>
 <?= form_close() ?>
