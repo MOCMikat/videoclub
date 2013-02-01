@@ -19,3 +19,7 @@
 		<?php endforeach; ?>
 	</tbody>
 </table>
+<?= barra_navegacion('admin/peliculas/index', $pag, $npags); ?>
+<?= form_open('admin/peliculas/insertar') ?>
+  <?= form_submit('insertar', 'Insertar') ?>
+<?= form_close()?>
