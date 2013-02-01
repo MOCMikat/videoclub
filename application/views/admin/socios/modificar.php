@@ -1,5 +1,6 @@
 <p><?= validation_errors() ?></p>
 <?= form_open('admin/socios/modificar') ?>
+  <?= form_hidden('telefono', "{$socio['id']}") ?><br/>
   <?= form_label('Usuario:', 'usuario') ?>
   <?= form_input('usuario', set_value('usuario')) ?><br/>
   <?= form_label('Contraseña:', 'password') ?>

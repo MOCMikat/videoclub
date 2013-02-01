@@ -41,7 +41,7 @@ class Socios extends CI_Controller {
       return;
     } */
       if ($this->input->post('modificar')) {
-			  $this->Socio->modificar($this->input->post('modificar'));
+			  $this->Socio->modificar($this->input->post());
 		  }
       $socio = $this->Socio->obtener_socios('id = ?', array($id));
       $data = array('socio' => $socio);
