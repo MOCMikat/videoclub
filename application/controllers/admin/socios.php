@@ -6,9 +6,10 @@ class Socios extends CI_Controller {
 
 		if ($baja) {
 			$this->Socio->baja($baja);
-		} else {
-			$this->load->view->('admin/socios/confirmar',$id);
 		}
+		
+		$this->load->view->('socios/confirmar',$id);
+		
 	}  
-	
+
 }
