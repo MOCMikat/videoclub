@@ -85,7 +85,7 @@
     </tr>
   </table>
   <p>
-    <?= form_submit('anadir', 'Añadir') ?>
+    <?= form_submit('insertar', 'Insertar') ?>
     <?= form_submit(array('name' => 'cancelar',
                           'value' => 'Cancelar',
                           'formaction' => 'index')) ?>

@@ -150,5 +150,9 @@ class Peliculas extends CI_Controller {
       return FALSE;
     }
   }
+  
+  function puntos_y_comas($valor) {
+    return str_replace(',', '.', $valor);
+  }
 }
 
