@@ -4,6 +4,11 @@
 
 class Pelicula extends CI_Model{
 
+  function __construct() {
+  	parent::__construct();
+  	$this->load->database();
+  }
+
   function obtener_todos($cond = '', $valores = array(),
                          $limit = '', $offset = '') {
     $where = ($cond != null) ? "where $cond" : '';
