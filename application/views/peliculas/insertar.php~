@@ -51,7 +51,7 @@
     </tr>
     <tr>
       <td align="right">
-        <label for="duracion">Duración:</label>
+        <label for="duracion">Duración*:</label>
       </td>
       <td>
         <?= form_input(array('name' => 'duracion',
@@ -74,7 +74,7 @@
     </tr>
     <tr>
       <td align="right">
-        <label for="anio">Año:</label>
+        <label for="anio">Año*:</label>
       </td>
       <td>
         <?= form_input(array('name' => 'anio',
