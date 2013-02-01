@@ -1,4 +1,4 @@
 #!/bin/bash
 
-psql -U usuario datos < tienda.sql
+psql -U videoclub videoclub < videoclub.sql
 

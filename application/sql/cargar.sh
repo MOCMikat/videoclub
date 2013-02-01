@@ -1,4 +1,4 @@
 #!/bin/bash
 
-psql -U videoclub videoclub < videoclub.sql
+psql -h localhost -U videoclub videoclub < videoclub.sql
 
