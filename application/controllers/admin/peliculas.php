@@ -22,17 +22,17 @@ class Peliculas extends CI_Controller {
     if ($this->input->post('buscar')) {
       $columna = $this->input->post('columna');
       $criterio = $this->input->post('criterio');
-      $this->session->set_userdata('columna', $columna);
-      $this->session->set_userdata('criterio', $criterio);
-    } else if ($this->session->userdata('columna')) {
+      //$this->session->set_userdata('columna', $columna);
+      //$this->session->set_userdata('criterio', $criterio);
+    /*} else if ($this->session->userdata('columna')) {
       $columna = $this->session->userdata('columna');
       $criterio = $this->session->userdata('criterio');
-    } else {
+    */} else {
       $columna = 'titulo';
       $criterio = '';
     }
 
-    list($res, $npags) = $this->paginador->paginar($this->Peliculas,
+    list($res, $npags) = $this->paginador->paginar($this->Pelicula,
                                                    $columna,
                                                    $criterio,
                                                    $pag);
