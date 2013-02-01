@@ -14,12 +14,12 @@ class Peliculas extends CI_Controller {
     $this->load->library('paginador');
   
     $columnas = array('titulo'      => 'Título',
+                      'precio'      => 'Precio',
                       'genero'      => 'Genero',
                       'director'    => 'Director',
-                      'descripcion' => 'Descripción',
-                      'anio'        => 'Año',
                       'duracion'    => 'Duración',
-                      'precio'      => 'Precio');
+                      'descripcion' => 'Descripción',
+                      'anio'        => 'Año');
 
     if ($this->input->post('buscar')) {
       $columna = $this->input->post('columna');
@@ -47,7 +47,7 @@ class Peliculas extends CI_Controller {
                   'npags'    => $npags);
     
     $data['mensaje'] = $this->session->flashdata('mensaje');
-    $this->template->load('template', 'peliculas/index', $data);
+    $this->template->load('template', 'admin/peliculas/index', $data);
   }
   
   
@@ -66,7 +66,7 @@ class Peliculas extends CI_Controller {
       return;
     }
 
-    $this->template->load('template', 'peliculas/insertar');
+    $this->template->load('template', 'admin/peliculas/insertar');
   }
   
   function modificar() {

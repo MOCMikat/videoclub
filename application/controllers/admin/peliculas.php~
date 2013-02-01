@@ -47,7 +47,7 @@ class Peliculas extends CI_Controller {
                   'npags'    => $npags);
     
     $data['mensaje'] = $this->session->flashdata('mensaje');
-    $this->template->load('template', 'peliculas/index', $data);
+    $this->template->load('template', 'admin/peliculas/index', $data);
   }
   
   
@@ -66,7 +66,7 @@ class Peliculas extends CI_Controller {
       return;
     }
 
-    $this->template->load('template', 'peliculas/insertar', $data);
+    $this->template->load('template', 'admin/peliculas/insertar');
   }
   
   function modificar() {
@@ -149,6 +149,10 @@ class Peliculas extends CI_Controller {
                              'El precio no es válido');
       return FALSE;
     }
+  }
+  
+  function puntos_y_comas($valor) {
+    return str_replace(',', '.', $valor);
   }
 }
 
