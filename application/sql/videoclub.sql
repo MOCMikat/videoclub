@@ -28,3 +28,42 @@ create table peliculas (
   anio        numeric(4) not null
 );
 
+insert into peliculas (titulo, precio, genero, director, duracion, descripcion, anio) 
+    values('El ataque de los tomates asesinos', 1, 'terror', 'Walter Simons', 95, 'Cuando los tomates cobran vida ...', 1979);
+  insert into peliculas (titulo, precio, genero, director, duracion, descripcion, anio) 
+    values('La bala que doblo la esquina', 8, 'western', 'Manolito Palotes', 145, 'Balas en contra de la fisica que ...', 1982);
+
+create index idx_peliculas_titulo on peliculas (titulo);
+create index idx_peliculas_anio on peliculas (anio);
+
+drop table ci_sessions cascade;
+
+CREATE TABLE ci_sessions (
+	session_id varchar(40) DEFAULT '0' NOT NULL,
+	ip_address varchar(45) DEFAULT '0' NOT NULL,
+	user_agent varchar(120) NOT NULL,
+	last_activity bigint DEFAULT 0 NOT NULL,
+	user_data text NOT NULL,
+	PRIMARY KEY (session_id)
+);
+
+create index last_activity_idx on ci_sessions (last_activity);
+
+drop table reservas cascade;
+
+create table reservas (
+  id            bigserial         constraint pk_reservas primary key,
+  id_socio      bigint            not null constraint fk_reservas_socios
+                                  references socios (id) on delete cascade
+                                  on update cascade,
+  id_pelicula   bigint            not null constraint fk_reservas_peliculas
+                                  references peliculas (id) on delete cascade on 
+                                  update cascade,
+  f_alquiler    date,
+  f_devolucion  date
+);
+
+insert into reservas (id_socio, id_pelicula, f_alquiler, f_devolucion) 
+  values(1, 1, current_date, current_date+4);
+insert into reservas (id_socio, id_pelicula, f_alquiler, f_devolucion) 
+  values(3, 2, current_date-2, (current_date-2)+4);

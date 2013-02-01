@@ -1,5 +1,5 @@
 <?= form_open('admin/socios/insertar') ?>
-<?php if(isset($res)){ echo $res}else{} ?>
+
 <table>	
 	<tr>
 		<td><?= form_label('Usuario:', 'usuario') ?></td>
