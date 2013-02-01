@@ -4,6 +4,8 @@ class Peliculas extends CI_Controller {
 
   function __construct() {
     parent::__construct();
+    $this->load->library('session');
+    $this->load->library('Template');
     $this->load->model('Pelicula');
   }
   
@@ -32,7 +34,7 @@ class Peliculas extends CI_Controller {
       $criterio = '';
     }
 
-    list($res, $npags) = $this->paginador->paginar($this->Peliculas,
+    list($res, $npags) = $this->paginador->paginar($this->Pelicula,
                                                    $columna,
                                                    $criterio,
                                                    $pag);
@@ -45,7 +47,7 @@ class Peliculas extends CI_Controller {
                   'npags'    => $npags);
     
     $data['mensaje'] = $this->session->flashdata('mensaje');
-    $this->template->load('template', 'admin/peliculas/index', $data);
+    $this->template->load('template', 'peliculas/index', $data);
   }
   
   
@@ -53,9 +55,9 @@ class Peliculas extends CI_Controller {
 
   function insertar() {
     $this->load->helper('url');
-    $this->load->model('Peliculas');
+    $this->load->model('Pelicula');
 
-    if ($this->input->post('anadir') &&
+    if ($this->input->post('insertar') &&
         $this->reglas_validacion() == TRUE) {
         $this->Pelicula->insertar($this->input->post());
       $this->session->set_flashdata('mensaje', 'La película se ha ' .
@@ -64,7 +66,7 @@ class Peliculas extends CI_Controller {
       return;
     }
 
-    $this->template->load('template', 'admin/peliculas/insertar', $data);
+    $this->template->load('template', 'peliculas/insertar');
   }
   
   function modificar() {

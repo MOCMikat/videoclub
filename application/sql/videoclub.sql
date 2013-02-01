@@ -31,7 +31,7 @@ create table peliculas (
 insert into peliculas (titulo, precio, genero, director, duracion, descripcion, anio) 
     values('El ataque de los tomates asesinos', 1, 'terror', 'Walter Simons', 95, 'Cuando los tomates cobran vida ...', 1979);
   insert into peliculas (titulo, precio, genero, director, duracion, descripcion, anio) 
-    values('El ataque de los tomates asesinos', 8, 'western', 'Walter Simons', 145, 'Balas en contra de la fisica que ...', 1982);
+    values('La bala que doblo la esquina', 8, 'western', 'Manolito Palotes', 145, 'Balas en contra de la fisica que ...', 1982);
 
 create index idx_peliculas_titulo on peliculas (titulo);
 create index idx_peliculas_anio on peliculas (anio);
@@ -49,3 +49,21 @@ CREATE TABLE ci_sessions (
 
 create index last_activity_idx on ci_sessions (last_activity);
 
+drop table reservas cascade;
+
+create table reservas (
+  id            bigserial         constraint pk_reservas primary key,
+  id_socio      bigint            not null constraint fk_reservas_socios
+                                  references socios (id) on delete cascade
+                                  on update cascade,
+  id_pelicula   bigint            not null constraint fk_reservas_peliculas
+                                  references peliculas (id) on delete cascade on 
+                                  update cascade,
+  f_alquiler    date,
+  f_devolucion  date
+);
+
+insert into reservas (id_socio, id_pelicula, f_alquiler, f_devolucion) 
+  values(1, 1, current_date, current_date+4);
+insert into reservas (id_socio, id_pelicula, f_alquiler, f_devolucion) 
+  values(3, 2, current_date-2, (current_date-2)+4);

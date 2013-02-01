@@ -1,4 +1,0 @@
-#!/bin/bash
-
-psql -U usuario datos < tienda.sql
-
