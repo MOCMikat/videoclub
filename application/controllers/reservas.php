@@ -11,11 +11,11 @@ class Reservas extends CI_Controller {
 	function index() {
 		$res = $this->Reserva->obtener_todos('', '', '', '');
 
-		$columnas = array('id'            => 'ID',
-		                  'id_socio' 		  => 'IdSocio',
-		                  'id_pelicula'   => 'IdPelicula',
-		                  'f_alquiler'    => 'FAlquiler',
-		                  'f_devolucion'  => 'FDevolucion');
+		$columnas = array('id'            => 'ID Reserva',
+		                  'id_socio' 		  => 'ID Socio',
+		                  'id_pelicula'   => 'ID Pelicula',
+		                  'f_alquiler'    => 'Fecha Alquiler',
+		                  'f_devolucion'  => 'Fecha Devolución');
 
 		$data = array('res' => $res, 'columnas' => $columnas);
 		$this->load->view('reservas/index', $data);
