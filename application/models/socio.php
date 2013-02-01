@@ -14,9 +14,9 @@ class Socio extends CI_Model {
 
 
 	
-	function baja($baja){
+	function baja($id){
 		$this->db->query ("delete from socios
-														 where id = $baja");
+														 where id = $id");
 		redirect('socios/index');
 	}  
 
