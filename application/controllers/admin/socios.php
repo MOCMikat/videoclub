@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Socios extends CI_Controller {
-<<<<<<< HEAD
+
 
 	  	
 
@@ -15,7 +15,7 @@ class Socios extends CI_Controller {
 			$this->load->view('admin/socios/insertar');			
 		}
 	}
-=======
+
     
     function __construct() {
       parent::__construct();
@@ -55,6 +55,6 @@ class Socios extends CI_Controller {
   		}
   		$this->load->view->('socios/confirmar',$id);
 	  }
->>>>>>> 29589d0f701cfefe28663341b25b93ef776f4555
+
 
 }
