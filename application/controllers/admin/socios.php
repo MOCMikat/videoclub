@@ -42,20 +42,31 @@ class Socios extends CI_Controller {
       redirect('clientes/index');
       return;
     } */
-      if ($this->input->post('modificar')) {
-			  $this->Socio->modificar($this->input->post('modificar'));
+      if ($this->input->post('modificarsocio')) {
+			  $this->Socio->modificar($this->input->post());
 		  }
+		  
+		  if ($this->input->post('modificarprimera') &&
+        $this->reglas_validacion() == TRUE) {
+        $this->Socio->modificar($this->input->post());
+        redirect('admin/socios/index');
+        return;
+      } else {  
+  		  $this->load->view('admin/socios/modificar');
+		  }
+		  $id = $this->input->post('id');
       $socio = $this->Socio->obtener_socios('id = ?', array($id));
-      $data = array('socio' => $socio);
-      $this->load->view('admin/socios/modificar', $data);
+      $data = array('socio' => $socio[0]);
+      $this->load->view('admin/socios/modificarprimera', $data);
   }
   
- 	function baja($id){
+ 	function baja(){
 		if ($this->input->post('baja')) {
-			$this->Socio->baja($this->input->post('idsocio'));
+			$this->Socio->darbaja($this->input->post('id'));
+		} else {
+			$data['id'] = $this->input->post('id');
+ 			$this->load->view('admin/socios/confirmar', $data);
 		}
-		$data['id'] = $id;
-		$this->load->view('admin/socios/confirmar',$data);
   }
 
 	private function reglas_validacion() {

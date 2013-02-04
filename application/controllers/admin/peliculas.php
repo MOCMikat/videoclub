@@ -19,7 +19,8 @@ class Peliculas extends CI_Controller {
                       'director'    => 'Director',
                       'duracion'    => 'Duración',
                       'descripcion' => 'Descripción',
-                      'anio'        => 'Año');
+                      'anio'        => 'Año',
+                      'opciones'    => 'Opciones');
 
     if ($this->input->post('buscar')) {
       $columna = $this->input->post('columna');

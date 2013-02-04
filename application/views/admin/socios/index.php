@@ -18,6 +18,7 @@
         <td><?= form_submit('borrar', 'Borrar') ?></td>
         <?= form_close() ?>
         <?= form_open('admin/socios/modificar') ?>
+        <?= form_hidden('id', $socio->id) ?>
         <td><?= form_submit('modificar', 'Modificar') ?></td>
         <?= form_close() ?>
       </tr>
