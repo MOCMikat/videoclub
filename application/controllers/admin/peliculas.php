@@ -4,6 +4,8 @@ class Peliculas extends CI_Controller {
 
   function __construct() {
     parent::__construct();
+    $this->load->library('session');
+    $this->load->library('Template');
     $this->load->model('Pelicula');
   }
   
@@ -12,22 +14,22 @@ class Peliculas extends CI_Controller {
     $this->load->library('paginador');
   
     $columnas = array('titulo'      => 'Título',
+                      'precio'      => 'Precio',
                       'genero'      => 'Genero',
                       'director'    => 'Director',
-                      'descripcion' => 'Descripción',
-                      'anio'        => 'Año',
                       'duracion'    => 'Duración',
-                      'precio'      => 'Precio');
+                      'descripcion' => 'Descripción',
+                      'anio'        => 'Año');
 
     if ($this->input->post('buscar')) {
       $columna = $this->input->post('columna');
       $criterio = $this->input->post('criterio');
-      //$this->session->set_userdata('columna', $columna);
-      //$this->session->set_userdata('criterio', $criterio);
-    /*} else if ($this->session->userdata('columna')) {
+      $this->session->set_userdata('columna', $columna);
+      $this->session->set_userdata('criterio', $criterio);
+    } else if ($this->session->userdata('columna')) {
       $columna = $this->session->userdata('columna');
       $criterio = $this->session->userdata('criterio');
-    */} else {
+    } else {
       $columna = 'titulo';
       $criterio = '';
     }
@@ -53,9 +55,9 @@ class Peliculas extends CI_Controller {
 
   function insertar() {
     $this->load->helper('url');
-    $this->load->model('Peliculas');
+    $this->load->model('Pelicula');
 
-    if ($this->input->post('anadir') &&
+    if ($this->input->post('insertar') &&
         $this->reglas_validacion() == TRUE) {
         $this->Pelicula->insertar($this->input->post());
       $this->session->set_flashdata('mensaje', 'La película se ha ' .
@@ -64,7 +66,7 @@ class Peliculas extends CI_Controller {
       return;
     }
 
-    $this->template->load('template', 'admin/peliculas/insertar', $data);
+    $this->template->load('template', 'admin/peliculas/insertar');
   }
   
   function modificar() {
@@ -147,6 +149,10 @@ class Peliculas extends CI_Controller {
                              'El precio no es válido');
       return FALSE;
     }
+  }
+  
+  function puntos_y_comas($valor) {
+    return str_replace(',', '.', $valor);
   }
 }
 
