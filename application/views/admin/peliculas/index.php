@@ -3,6 +3,7 @@
 		<?php foreach ($columnas as $col): ?>
 			<th><?= $col ?></th>
 		<?php endforeach; ?>
+		<th colspan="2">Opciones</th>
 	</thead>
 
 	<tbody>
@@ -14,7 +15,17 @@
 				<td><?= $fila->director ?></td>
 				<td><?= $fila->duracion ?></td>
 				<td><?= $fila->descripcion ?></td>
-				<td><?= $fila->anio ?></td>
+				<td><?= $fila->anio ?></td>				
+				  <?= form_open('admin/peliculas/modificar') ?>
+				    <?= form_hidden('id',$fila-> id)?>
+            <td><?= form_submit('modificar', 'Modificar') ?></td>
+          <?= form_close()?>         
+          <?= form_open('admin/peliculas/eliminar') ?>
+				    <?= form_hidden('id',$fila-> id)?>
+            <td><?= form_submit('eliminar', 'Eliminar') ?></td>
+          <?= form_close()?>
+          
+				
 			</tr>
 		<?php endforeach; ?>
 	</tbody>

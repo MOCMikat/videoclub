@@ -72,7 +72,7 @@ class Peliculas extends CI_Controller {
   
   function modificar() {
     $this->load->helper('url');
-    $this->load->model('Peliculas');
+    $this->load->model('Pelicula');
 
     if ($this->input->post('modificar') &&
         $this->reglas_validacion() == TRUE) {
@@ -83,7 +83,7 @@ class Peliculas extends CI_Controller {
       return;
     }
 
-    $this->template->load('template', 'admin/peliculas/modificar', $data);
+    $this->template->load('template', 'admin/peliculas/modificar');
   }
   
   private function reglas_validacion() {
