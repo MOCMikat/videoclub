@@ -14,10 +14,10 @@ class Socio extends CI_Model {
 
 
 	
-	function baja($id){
+	function darbaja($id){
 		$this->db->query ("delete from socios
-														 where id = $id");
-		redirect('socios/index');
+														 where id = ?", array($id));
+		redirect('admin/socios/index');
 	}  
 
 

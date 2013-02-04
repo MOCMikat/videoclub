@@ -48,11 +48,12 @@ class Socios extends CI_Controller {
       $this->load->view('admin/socios/modificar', $data);
   }
   
- 	function baja($id){
+ 	function baja(){
 		if ($this->input->post('baja')) {
-			$this->Socio->baja($this->input->post('idsocio'));
+			$this->Socio->darbaja($this->input->post('id'));
+		} else {
+			$data['id'] = $this->input->post('id');
+ 			$this->load->view('admin/socios/confirmar', $data);
 		}
-		$data['id'] = $id;
-		$this->load->view('admin/socios/confirmar',$data);
   }
 }
