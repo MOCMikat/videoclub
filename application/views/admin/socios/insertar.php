@@ -31,4 +31,4 @@
 	</tr>
 </table>
 <?= form_close() ?>
-<?= anchor('admin/socios/index', 'Volver') ?>
+<?= anchor('admin/socios/index', 'Atrás') ?>

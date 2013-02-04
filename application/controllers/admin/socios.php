@@ -5,6 +5,7 @@ class Socios extends CI_Controller {
   function __construct() {
     parent::__construct();
     $this->load->model('Socio');
+ 		$this->load->library('Template');
   }
   
   function index() {
@@ -27,10 +28,10 @@ class Socios extends CI_Controller {
 
 		if($this->input->post('insertar') && $this->reglas_validacion() == TRUE){
 			$res = $this->Socio->insertar($this->input->post());
-			$this->load->view('admin/socios/insertar');
+		 $this->template->load('template', 'admin/socios/insertar');
 		} else {
 			
-			$this->load->view('admin/socios/insertar');			
+			 $this->template->load('template', 'admin/socios/insertar');			
 		}
 	}
     
