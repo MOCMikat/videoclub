@@ -24,7 +24,8 @@ class Socios extends CI_Controller {
 
 	function insertar(){
 		$this->load->model('Socio');	
-		if($this->input->post('insertar')){
+
+		if($this->input->post('insertar') && $this->reglas_validacion() == TRUE){
 			$res = $this->Socio->insertar($this->input->post());
 			$this->load->view('admin/socios/insertar');
 		} else {
@@ -58,11 +59,54 @@ class Socios extends CI_Controller {
       $this->load->view('admin/socios/modificarprimera', $data);
   }
   
- 	function baja($id){
+ 	function baja(){
 		if ($this->input->post('baja')) {
-			$this->Socio->baja($this->input->post('idsocio'));
+			$this->Socio->darbaja($this->input->post('id'));
+		} else {
+			$data['id'] = $this->input->post('id');
+ 			$this->load->view('admin/socios/confirmar', $data);
 		}
-		$data['id'] = $id;
-		$this->load->view('admin/socios/confirmar',$data);
   }
+
+	private function reglas_validacion() {
+    $reglas = array(  
+      array(
+        'field' => 'usuario',
+        'label' => 'Usuario',
+        'rules' => 'trim|required|is_unique[socios.usuario]'
+      ),
+      array(
+        'field' => 'password',
+        'label' => 'Contraseña',
+        'rules' => 'trim|required|min_length[6]|' .
+                   'matches[password_confirm]'
+      ),
+      array(
+        'field' => 'password_confirm',
+        'label' => 'Confirmar contraseña',
+        'rules' => 'trim|required'
+      ),
+      array(
+        'field' => 'email',
+        'label' => 'email',
+        'rules' => 'trim|required'
+      ),
+      array(
+        'field' => 'nombre',
+        'label' => 'Nombre',
+        'rules' => 'trim|required'
+      ),
+     
+      array(
+        'field' => 'telefono',
+        'label' => 'telefono',
+        'rules' => 'trim'
+      )
+    );
+    
+    $this->load->library('form_validation');
+    $this->form_validation->set_rules($reglas);
+    return $this->form_validation->run();
+  }
+	
 }
