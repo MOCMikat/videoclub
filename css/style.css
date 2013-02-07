@@ -1,0 +1,26 @@
+/* Hoja de estilo de común para todas las secciones */
+html {
+
+}
+
+body {
+	margin: 0px;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	-webkit-box-orient: vertical;
+}
+
+header {
+	height: 100px;
+	width: 100%;
+	background-color: red;
+	border: 2px solid blue;
+}
+
+section {
+	display: -webkit-box;
+	-webkit-box-pack: justify;
+	-webkit-box-align: center;
+	-webkit-box-orient: horizontal;
+}
