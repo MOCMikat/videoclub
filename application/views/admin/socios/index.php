@@ -1,4 +1,9 @@
-<table border="1" style="margin:auto">
+<html>
+<head>
+	<LINK REL="stylesheet" HREF="<?= base_url('css/socio.css') ?>" TYPE="text/css">
+</head>
+<body>
+<table>
   <thead>
     <th>Usuario</th>
     <th>Email</th>
@@ -28,3 +33,5 @@
 <?= form_open('admin/socios/insertar') ?>
   <?= form_submit('anadir', 'Añadir Socio') ?>
 <?= form_close() ?>
+</body>
+</html>
