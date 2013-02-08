@@ -50,7 +50,7 @@ class Socio extends CI_Model {
                              from socios
                              $where", $valores);
                       
-    return $res->result();
+    return $res->result_array();
   }
 
 
