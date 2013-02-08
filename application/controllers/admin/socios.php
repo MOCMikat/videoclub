@@ -27,7 +27,8 @@ class Socios extends CI_Controller {
 		$this->load->model('Socio');	
 		if($this->input->post('insertar') && $this->reglas_validacion() == TRUE){
 				$res = $this->Socio->insertar($this->input->post());
-		 	 	$this->template->load('template', 'admin/socios/insertar');
+		 	 	redirect('admin/socios/index');
+				return;
 		} else {
 			 	$this->template->load('template', 'admin/socios/insertar');			
 		}
