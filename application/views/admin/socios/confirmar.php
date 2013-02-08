@@ -1,4 +1,4 @@
-<?= form_open('socios/baja'); ?>
+<?= form_open('admin/socios/baja'); ?>
 	<table>
 		<tr>
 			<td colspan="2">
@@ -7,8 +7,8 @@
 		</tr>
 		<tr>
 			<td>
-			  <?= form_hidden('idsocio', $id); ?>
-				<?= form_submit('baja', 'Si', $id); ?>
+			  <?= form_hidden('id', $id); ?>
+				<?= form_submit('baja', 'Si'); ?>
 			</td>
 			<td>
 				<?= form_submit(array('name' 			 => 'cancelar',

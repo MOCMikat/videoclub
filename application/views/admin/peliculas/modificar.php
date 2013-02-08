@@ -1,5 +1,7 @@
 <?= validation_errors() ?>
-<?= form_open('admin/peliculas/insertar') ?>
+<?= form_open('admin/peliculas/modificar') ?>  
+
+
   <table>
     <tr>
       <td align="right">
@@ -51,7 +53,7 @@
     </tr>
     <tr>
       <td align="right">
-        <label for="duracion">Duración:</label>
+        <label for="duracion">Duración*:</label>
       </td>
       <td>
         <?= form_input(array('name' => 'duracion',
@@ -74,7 +76,7 @@
     </tr>
     <tr>
       <td align="right">
-        <label for="anio">Año:</label>
+        <label for="anio">Año*:</label>
       </td>
       <td>
         <?= form_input(array('name' => 'anio',
@@ -85,7 +87,7 @@
     </tr>
   </table>
   <p>
-    <?= form_submit('anadir', 'Añadir') ?>
+    <?= form_submit('modificar', 'Modificar') ?>
     <?= form_submit(array('name' => 'cancelar',
                           'value' => 'Cancelar',
                           'formaction' => 'index')) ?>

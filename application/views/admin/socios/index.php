@@ -4,6 +4,7 @@
     <th>Email</th>
     <th>Nombre</th>
     <th>Teléfono</th>
+    <th colspan="2">Opciones</th>
   </thead>
   <tbody>
     <?php foreach ($res as $socio): ?>
@@ -12,6 +13,14 @@
         <td><?= $socio->email ?></td>
         <td><?= $socio->nombre ?></td>
         <td><?= $socio->telefono ?></td>
+        <?= form_open('admin/socios/baja') ?>
+        <?= form_hidden('id', $socio->id) ?>
+        <td><?= form_submit('borrar', 'Borrar') ?></td>
+        <?= form_close() ?>
+        <?= form_open('admin/socios/modificar') ?>
+        <?= form_hidden('id', $socio->id) ?>
+        <td><?= form_submit('modificar', 'Modificar') ?></td>
+        <?= form_close() ?>
       </tr>
     <?php endforeach; ?>
   </tbody>

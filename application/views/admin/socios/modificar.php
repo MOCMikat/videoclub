@@ -1,5 +1,6 @@
 <p><?= validation_errors() ?></p>
 <?= form_open('admin/socios/modificar') ?>
+  <?= form_hidden('id', $socio->id) ?><br/>
   <?= form_label('Usuario:', 'usuario') ?>
   <?= form_input('usuario', set_value('usuario')) ?><br/>
   <?= form_label('Contraseña:', 'password') ?>
@@ -13,8 +14,8 @@
   <?= form_input('nombre', set_value('nombre')) ?><br/>
   <?= form_label('Teléfono:', 'telefono') ?>
   <?= form_input('telefono', set_value('telefono')) ?><br/>
-  <?= form_submit('modificar', 'Modificar socio') ?>
+  <?= form_submit('modificarsocio', 'Modificar socio') ?>
   <?= form_submit(array('name' => 'cancelar',
                         'value' => 'Cancelar',
-                        'formaction' => 'http://localhost/web/video/index.php/admin/socios/index')) ?>
+                        'formaction' => 'http://localhost/web/videoclub/index.php/admin/socios/index')) ?>
 <?= form_close() ?>

@@ -14,12 +14,13 @@ class Peliculas extends CI_Controller {
     $this->load->library('paginador');
   
     $columnas = array('titulo'      => 'Título',
+                      'precio'      => 'Precio',
                       'genero'      => 'Genero',
                       'director'    => 'Director',
+                      'duracion'    => 'Duración',
                       'descripcion' => 'Descripción',
                       'anio'        => 'Año',
-                      'duracion'    => 'Duración',
-                      'precio'      => 'Precio');
+                      'opciones'    => 'Opciones');
 
     if ($this->input->post('buscar')) {
       $columna = $this->input->post('columna');
@@ -47,7 +48,7 @@ class Peliculas extends CI_Controller {
                   'npags'    => $npags);
     
     $data['mensaje'] = $this->session->flashdata('mensaje');
-    $this->template->load('template', 'peliculas/index', $data);
+    $this->template->load('template', 'admin/peliculas/index', $data);
   }
   
   
@@ -66,12 +67,12 @@ class Peliculas extends CI_Controller {
       return;
     }
 
-    $this->template->load('template', 'peliculas/insertar');
+    $this->template->load('template', 'admin/peliculas/insertar');
   }
   
   function modificar() {
     $this->load->helper('url');
-    $this->load->model('Peliculas');
+    $this->load->model('Pelicula');
 
     if ($this->input->post('modificar') &&
         $this->reglas_validacion() == TRUE) {
@@ -82,7 +83,7 @@ class Peliculas extends CI_Controller {
       return;
     }
 
-    $this->template->load('template', 'admin/peliculas/modificar', $data);
+    $this->template->load('template', 'admin/peliculas/modificar');
   }
   
   private function reglas_validacion() {
@@ -149,6 +150,10 @@ class Peliculas extends CI_Controller {
                              'El precio no es válido');
       return FALSE;
     }
+  }
+  
+  function puntos_y_comas($valor) {
+    return str_replace(',', '.', $valor);
   }
 }
 
