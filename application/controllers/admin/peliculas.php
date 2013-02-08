@@ -13,14 +13,14 @@ class Peliculas extends CI_Controller {
     $this->load->helper('url');
     $this->load->library('paginador');
   
-    $columnas = array('titulo'      => 'Título',
-                      'precio'      => 'Precio',
-                      'genero'      => 'Genero',
-                      'director'    => 'Director',
-                      'duracion'    => 'Duración',
-                      'descripcion' => 'Descripción',
-                      'anio'        => 'Año',
-                      'opciones'    => 'Opciones');
+    $columnas = array('id'       => 'Id',
+                      'titulo'   => 'Título',
+                      'precio'   => 'Precio',
+                      'genero'   => 'Genero',
+                      'duracion' => 'Duración',
+                      'anio'     => 'Año');
+
+    $descripcion = 'titulo';
 
     if ($this->input->post('buscar')) {
       $columna = $this->input->post('columna');
@@ -40,12 +40,13 @@ class Peliculas extends CI_Controller {
                                                    $criterio,
                                                    $pag);
     
-    $data = array('res'      => $res,
-                  'columnas' => $columnas,
-                  'columna'  => $columna,
-                  'criterio' => $criterio,
-                  'pag'      => $pag,
-                  'npags'    => $npags);
+    $data = array('res'         => $res,
+                  'columnas'    => $columnas,
+                  'descripcion' => $descripcion,
+                  'columna'     => $columna,
+                  'criterio'    => $criterio,
+                  'pag'         => $pag,
+                  'npags'       => $npags);
     
     $data['mensaje'] = $this->session->flashdata('mensaje');
     $this->template->load('template', 'admin/peliculas/index', $data);
@@ -70,20 +71,29 @@ class Peliculas extends CI_Controller {
     $this->template->load('template', 'admin/peliculas/insertar');
   }
   
-  function modificar() {
+  function modificar($id = null) {
     $this->load->helper('url');
     $this->load->model('Pelicula');
 
-    if ($this->input->post('modificar') &&
-        $this->reglas_validacion() == TRUE) {
+    if ($this->input->post('modificar')) {
+      $id = $this->input->post('id');
+      if ($this->reglas_validacion() == TRUE) {
         $this->Pelicula->modificar($this->input->post());
-      $this->session->set_flashdata('mensaje', 'La película se ha ' .
-                                    'modificado correctamente');
-      redirect('admin/peliculas/index');
-      return;
+        $this->session->set_flashdata('mensaje',
+            'La película se ha modificado correctamente');
+        redirect('admin/peliculas/index');
+        return;
+      }
+    } else {
+      if ($id == null) {
+        redirect('admin/peliculas/index');
+        return;
+      }
     }
 
-    $this->template->load('template', 'admin/peliculas/modificar');
+    $data['pelicula'] = $this->Pelicula->por_id($id);
+    $this->template->load('template', 'admin/peliculas/modificar',
+                          $data);
   }
   
   private function reglas_validacion() {

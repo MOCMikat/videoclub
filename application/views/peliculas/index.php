@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="http://localhost/web/videoclub/css/style.css">
+    <link rel="stylesheet" type="text/css"
+          href="<?= base_url('css/style.css') ?>">
 	<title>Videoclub</title>
 </head>
 <body>

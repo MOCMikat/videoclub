@@ -20,7 +20,7 @@ class Pelicula extends CI_Model{
                              order by id
                              $limit
                              $offset", $valores);
-    return $res->result();
+    return $res->result_array();
   }
 
   function obtener_filtrado($columna, $criterio, $limit = '',
@@ -31,7 +31,9 @@ class Pelicula extends CI_Model{
   }
 
   function por_id($id) {
-    return $this->obtener_todos("id = ?", array($id));
+    $res = $this->obtener_todos("id = ?", array($id));
+    if (!empty($res)) return $res[0];
+    return $res;
   }
 
   function por_titulo($titulo) {
@@ -68,12 +70,15 @@ class Pelicula extends CI_Model{
 
   function modificar($columnas) {
     extract($columnas);
-    $res = $this->db->query("update peliculas set titulo = ?, precio = ?, 
-                                                    genero = ?, director = ?, 
-                                                    duracion = ?, descripcion = ?, 
-                                                    anio = ?",
-                             array($titulo, $precio, $genero, $director,
-                                   $duracion, $descripcion, $anio));
+    $res = $this->db->query("update peliculas
+                                set titulo = ?, precio = ?, 
+                                    genero = ?, director = ?, 
+                                    duracion = ?, descripcion = ?, 
+                                    anio = ?
+                              where id = ?",
+                             array($titulo, $precio, $genero,
+                                   $director, $duracion,
+                                   $descripcion, $anio, $id));
     return $this->db->affected_rows();
   }
 
