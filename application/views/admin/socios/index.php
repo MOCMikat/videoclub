@@ -1,25 +1,23 @@
 <table border="1" style="margin:auto">
   <thead>
-    <th>Usuario</th>
-    <th>Email</th>
-    <th>Nombre</th>
-    <th>Teléfono</th>
-    <th colspan="2">Opciones</th>
+		<?php foreach ($columnas as $k): ?>
+			<th><?= $k ?></th>
+		<?php endforeach; ?>
+    <th>Opciones</th>
   </thead>
   <tbody>
     <?php foreach ($res as $socio): ?>
       <tr>
-        <td><?= $socio->usuario ?></td>
-        <td><?= $socio->email ?></td>
-        <td><?= $socio->nombre ?></td>
-        <td><?= $socio->telefono ?></td>
-        <?= form_open('admin/socios/baja') ?>
-        <?= form_hidden('id', $socio->id) ?>
-        <td><?= form_submit('borrar', 'Borrar') ?></td>
-        <?= form_close() ?>
-        <?= form_open('admin/socios/modificar') ?>
-        <?= form_hidden('id', $socio->id) ?>
-        <td><?= form_submit('modificar', 'Modificar') ?></td>
+			  <?php foreach ($columnas as $k => $v): ?>
+			    <?php if ($k == 'id' || $k == $usuario): ?>
+			      <td><?= anchor('admin/socios/modificar/' .
+			                     $socio['id'], $socio[$k]) ?></td>
+  			  <?php else: ?>
+  			    <td><?= $socio[$k] ?></td>
+  			  <?php endif; ?>
+				<?php endforeach ?>
+        <?= form_open('admin/socios/baja' . $socio['id']) ?>
+          <td><?= form_submit('borrar', 'Borrar') ?></td>
         <?= form_close() ?>
       </tr>
     <?php endforeach; ?>
