@@ -4,33 +4,37 @@ class Socios extends CI_Controller {
 
   function __construct() {
     parent::__construct();
+    $this->load->library('session');
+    $this->load->library('Template');
     $this->load->model('Socio');
+ 		$this->load->library('Template');
   }
   
   function index() {
-    
-    $columnas = array('usuario'   => 'Usuario',
+    $columnas = array('id'        => 'ID',
+                      'usuario'   => 'Usuario',
                       'email'     => 'Email',
                       'nombre'    => 'Nombre',
-                      'telefono'  => 'Telñefono');
+                      'telefono'  => 'Teléfono');
                       
+    $usuario = 'usuario';
     $res = $this->Socio->obtener_socios();
-                      
+       
     $data = array('columnas'  => $columnas,
-                  'res'    => $res);
+                  'res'       => $res,
+                  'usuario'   => $usuario);
                       
-    $this->load->view('admin/socios/index', $data);
+    $this->template->load('template', 'admin/socios/index', $data);
   }
 
 	function insertar(){
 		$this->load->model('Socio');	
-
 		if($this->input->post('insertar') && $this->reglas_validacion() == TRUE){
-			$res = $this->Socio->insertar($this->input->post());
-			$this->load->view('admin/socios/insertar');
+				$res = $this->Socio->insertar($this->input->post());
+		 	 	redirect('admin/socios/index');
+				return;
 		} else {
-			
-			$this->load->view('admin/socios/insertar');			
+			 	$this->template->load('template', 'admin/socios/insertar');			
 		}
 	}
     
