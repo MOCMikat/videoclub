@@ -22,7 +22,7 @@
 			<article>
 				<div>
 					<?php foreach ($res as $fila): ?>
-						<?= anchor('peliculas/index/' . $fila['id'], img('http://adjuntos.estamosrodando.com/imagen/el-ataque-de-los-tomates-asesinos-147175.jpg')) ?>
+						<?= anchor('peliculas/index/' . $fila['id'], img($fila['url_imagen'])) ?>
 					<?php endforeach; ?>
 				</div>
 			</article>

@@ -12,13 +12,14 @@ class Peliculas extends CI_Controller {
 	function index($id = null) {
 		$res = $this->Pelicula->obtener_todos('', '', '', '');
 
-		$columnas = array('titulo' 		=> 'Título',
-						  'precio' 		=> 'Precio',
-						  'genero' 		=> 'Género',
-						  'director' 	=> 'Director',
-						  'duracion' 	=> 'Duración',
-						  'descripcion' => 'Descripción',
-						  'anio' 		=> 'Año');
+		$columnas = array('titulo' 			  => 'Título',
+						  'precio' 			  => 'Precio',
+						  'genero' 			  => 'Género',
+						  'director' 		  => 'Director',
+						  'duracion' 		  => 'Duración',
+						  'descripcion' 	  => 'Descripción',
+						  'anio' 			  => 'Año',
+						  'fecha_lanzamiento' => 'Fecha lanzamiento');
 
 		$datos = $this->Pelicula->por_id($id);
 		$data = array('res'      => $res, 
