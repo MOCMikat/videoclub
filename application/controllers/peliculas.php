@@ -7,7 +7,7 @@ class Peliculas extends CI_Controller {
 		$this->load->model('Pelicula');
 	}
 
-	function index() {
+	function index($id=1) {
 		$res = $this->Pelicula->obtener_todos('', '', '', '');
 
 		$columnas = array('titulo' 		=> 'Título',
@@ -18,7 +18,8 @@ class Peliculas extends CI_Controller {
 						  'descripcion' => 'Descripción',
 						  'anio' 		=> 'Año');
 
-		$data = array('res' => $res, 'columnas' => $columnas);
+		$datos = $this->Pelicula->por_id($id);
+		$data = array('res' => $res, 'columnas' => $columnas, 'datos' => $datos);
 		$this->load->view('peliculas/index', $data);
 	}
 }

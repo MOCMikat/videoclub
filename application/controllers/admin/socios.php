@@ -4,33 +4,37 @@ class Socios extends CI_Controller {
 
   function __construct() {
     parent::__construct();
+    $this->load->library('session');
+    $this->load->library('Template');
     $this->load->model('Socio');
+ 		$this->load->library('Template');
   }
   
   function index() {
-    
-    $columnas = array('usuario'   => 'Usuario',
+    $columnas = array('id'        => 'ID',
+                      'usuario'   => 'Usuario',
                       'email'     => 'Email',
                       'nombre'    => 'Nombre',
-                      'telefono'  => 'Telñefono');
+                      'telefono'  => 'Teléfono');
                       
+    $usuario = 'usuario';
     $res = $this->Socio->obtener_socios();
-                      
+       
     $data = array('columnas'  => $columnas,
-                  'res'    => $res);
+                  'res'       => $res,
+                  'usuario'   => $usuario);
                       
-    $this->load->view('admin/socios/index', $data);
+    $this->template->load('template', 'admin/socios/index', $data);
   }
 
 	function insertar(){
 		$this->load->model('Socio');	
-
 		if($this->input->post('insertar') && $this->reglas_validacion() == TRUE){
-			$res = $this->Socio->insertar($this->input->post());
-			$this->load->view('admin/socios/insertar');
+				$res = $this->Socio->insertar($this->input->post());
+		 	 	redirect('admin/socios/index');
+				return;
 		} else {
-			
-			$this->load->view('admin/socios/insertar');			
+			 	$this->template->load('template', 'admin/socios/insertar');			
 		}
 	}
     
@@ -41,20 +45,31 @@ class Socios extends CI_Controller {
       redirect('clientes/index');
       return;
     } */
-      if ($this->input->post('modificar')) {
-			  $this->Socio->modificar($this->input->post('modificar'));
+      if ($this->input->post('modificarsocio')) {
+			  $this->Socio->modificar($this->input->post());
 		  }
+		  
+		  if ($this->input->post('modificarprimera') &&
+        $this->reglas_validacion() == TRUE) {
+        $this->Socio->modificar($this->input->post());
+        redirect('admin/socios/index');
+        return;
+      } else {  
+  		  $this->load->view('admin/socios/modificar');
+		  }
+		  $id = $this->input->post('id');
       $socio = $this->Socio->obtener_socios('id = ?', array($id));
-      $data = array('socio' => $socio);
-      $this->load->view('admin/socios/modificar', $data);
+      $data = array('socio' => $socio[0]);
+      $this->load->view('admin/socios/modificarprimera', $data);
   }
   
- 	function baja($id){
+ 	function baja(){
 		if ($this->input->post('baja')) {
-			$this->Socio->baja($this->input->post('idsocio'));
+			$this->Socio->darbaja($this->input->post('id'));
+		} else {
+			$data['id'] = $this->input->post('id');
+ 			$this->load->view('admin/socios/confirmar', $data);
 		}
-		$data['id'] = $id;
-		$this->load->view('admin/socios/confirmar',$data);
   }
 
 	private function reglas_validacion() {
