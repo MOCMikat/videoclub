@@ -5,31 +5,37 @@ body {
 	-webkit-box-align: center;
 	-webkit-box-orient: vertical;
 }
+
 header {
 	height: 100px;
 	width: 100%;
 	background-color: #444;
 }
+
 header h1 {
 	color: #eee;
 	padding: 30px;
 }
+
 section {
 	display: -webkit-box;
 	-webkit-box-pack: justify;
 	-webkit-box-align: center;
 	-webkit-box-orient: horizontal;
 }
+
 article div {
 	border: 1px solid #000;
 	width: 500px;
 	height: 300px;
 }
+
 article div a img {
 	width: 500px;
 	height: 300px;
 	display: none;
 }
+
 article div a:first-child img {
 	display: block;
 }

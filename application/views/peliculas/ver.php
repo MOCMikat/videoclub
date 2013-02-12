@@ -20,11 +20,8 @@
 
 		<section>
 			<article>
-				<div>
-					<?php foreach ($res as $fila): ?>
-						<?= anchor('peliculas/ver/' . $fila['id'], img($fila['url_imagen'])) ?>
-					<?php endforeach; ?>
-				</div>
+				<?= "Título: " . $res['titulo'] ?><br>
+				<?= img($res['url_imagen']) ?>
 			</article>
 		</section>
 	</body>
