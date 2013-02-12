@@ -17,8 +17,7 @@
   			    <td><?= $fila[$col] ?></td>
   			  <?php endif; ?>
 				<?php endforeach ?>
-        <?= form_open('admin/peliculas/eliminar/' . $fila['id']) ?>
-          <?= form_hidden('id',$fila['id']); ?>
+        <?= form_open('admin/peliculas/confir_eliminar/' . $fila['id']) ?>
           <td><?= form_submit('eliminar', 'Eliminar') ?></td>
         <?= form_close() ?>
 			</tr>
