@@ -95,6 +95,33 @@ class Peliculas extends CI_Controller {
     $this->template->load('template', 'admin/peliculas/modificar',
                           $data);
   }
+
+  function confir_eliminar($id = null){
+    $this->load->helper('url');
+
+    if ($id != null) {
+      $data['id'] = $id;
+      $this->template->load('template', 'admin/peliculas/confirmar_eliminar', $data);
+    } else {
+      redirect('admin/peliculas/index');
+    }
+  }
+
+  function eliminar() {
+    $this->load->model('Pelicula');
+
+    if ($this->input->post('si')) {
+      $id = $this->input->post('id');
+      if ($id == null) {
+        redirect('admin/peliculas/index');
+        return;
+      }
+      $this->Pelicula->borrar($id);
+      redirect('admin/peliculas/index');
+    } else {
+        redirect('admin/peliculas/index');
+    }
+  }
   
   private function reglas_validacion() {
     $reglas = array(
