@@ -56,6 +56,14 @@ class Pelicula extends CI_Model{
     return $this->obtener_todos("anio = ?", array($anio));
   }
 
+  function obtener_novedades() {
+    $nov = $this->db->query("select * from peliculas
+                             order by fecha_lanzamiento
+                             desc limit 1 offset 0");
+
+    return $nov;
+  }
+
   function insertar($columnas) {
     extract($columnas);
     $res = $this->db->query("insert into peliculas (titulo, precio, 

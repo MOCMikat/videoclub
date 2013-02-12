@@ -26,6 +26,7 @@
 </table>
 <?= barra_navegacion('admin/peliculas/index', $pag, $npags); ?>
 <?= form_open('admin/peliculas/insertar') ?>
+  
   <?= form_submit('anadir', 'Añadir') ?>
 <?= form_close()?>
 
