@@ -18,6 +18,7 @@
   			  <?php endif; ?>
 				<?php endforeach ?>
         <?= form_open('admin/peliculas/eliminar/' . $fila['id']) ?>
+          <?= form_hidden('id',$fila['id']); ?>
           <td><?= form_submit('eliminar', 'Eliminar') ?></td>
         <?= form_close() ?>
 			</tr>
