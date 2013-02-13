@@ -8,7 +8,9 @@
 	</head>
 	<body>
 		<header>
-			<h1>VIDEOCLUB - CABECERA</h1>
+			<h1>
+				<?= anchor('peliculas/index/', 'VIDEOCLUB') ?>
+			</h1>
 		</header>
 
 		<div>

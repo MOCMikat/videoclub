@@ -8,7 +8,9 @@
 	</head>
 	<body>
 		<header>
-			<h1>VIDEOCLUB - CABECERA</h1>
+			<h1>
+				<?= anchor('peliculas/index/', 'VIDEOCLUB') ?>
+			</h1>
 		</header>
 
 		<div>
@@ -20,7 +22,9 @@
 
 		<section>
 			<article>
-				<?= "Título: " . $res['titulo'] ?><br>
+				<h3>
+					<?= $res['titulo'] ?>
+				</h3>
 				<?= img($res['url_imagen']) ?>
 			</article>
 		</section>
