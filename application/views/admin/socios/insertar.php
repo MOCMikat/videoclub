@@ -63,8 +63,11 @@
 						) ?></td>
 	</tr>
 	<tr>
-		<td colspan="2"><?= form_submit('insertar', 'Grabar nuevo socio') ?></td>
+		<td colspan="2"><?= form_submit('insertar', 'Grabar nuevo socio') ?>
+										<?= form_submit(array('formaction' => 'index'), 'Volver') ?></td>
 	</tr>
 </table>
+
 <?= form_close() ?>
-<?= anchor('admin/socios/index', 'Atrás') ?>
+
+

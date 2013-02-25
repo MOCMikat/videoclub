@@ -36,6 +36,11 @@ class Pelicula extends CI_Model{
     return $res;
   }
 
+  function por_id_2($id) {
+    $res = $this->obtener_todos("id = ?", array($id));
+    if (!empty($res)) return $res[0];
+  }
+
   function por_titulo($titulo) {
     return $this->obtener_todos("titulo = ?", array($titulo));
   }
@@ -54,6 +59,14 @@ class Pelicula extends CI_Model{
 
   function por_anio($anio) {
     return $this->obtener_todos("anio = ?", array($anio));
+  }
+
+  function obtener_novedades() {
+    $nov = $this->db->query("select * from peliculas
+                             order by fecha_lanzamiento
+                             desc limit 1 offset 0");
+
+    return $nov->result_array();
   }
 
   function insertar($columnas) {

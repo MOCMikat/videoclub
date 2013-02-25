@@ -22,11 +22,10 @@
 
 		<section>
 			<article>
-				<div>
-					<?php foreach ($res as $fila): ?>
-						<?= anchor('peliculas/ver/' . $fila['id'], img($fila['url_imagen'])) ?>
-					<?php endforeach; ?>
-				</div>
+				<h3>
+					<?= $res['titulo'] ?>
+				</h3>
+				<?= img($res['url_imagen']) ?>
 			</article>
 		</section>
 	</body>
