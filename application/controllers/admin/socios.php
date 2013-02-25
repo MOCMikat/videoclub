@@ -52,38 +52,43 @@ class Socios extends CI_Controller {
 
 	function insertar(){
 		$this->load->model('Socio');	
-		if($this->input->post('insertar') && $this->reglas_validacion() == TRUE){
+		if($this->input->post('insertar') && $this->reglas_insertar() == TRUE){
 				$res = $this->Socio->insertar($this->input->post());
-		 	 	redirect('admin/socios/index');
-				return;
+		 	 	$this->template->load('template', 'admin/socios/insertar');
+		 	 	$this->session->set_flashdata('mensaje',
+            'El socio se ha modificado correctamente');
+        redirect('admin/socios/index');
+        return;
 		} else {
 			 	$this->template->load('template', 'admin/socios/insertar');			
 		}
 	}
     
   function modificar($id = null) {
-    /* if ($id == null) {
-      $this->session->set_flashdata('mensaje', 
-             '<strong style="color: red">No se ha elegido cliente</strong>');
-      redirect('clientes/index');
-      return;
-    } */
-      if ($this->input->post('modificarsocio')) {
-			  $this->Socio->modificar($this->input->post());
-		  }
-		  
-		  if ($this->input->post('modificarprimera') &&
-        $this->reglas_validacion() == TRUE) {
+    $this->load->helper('url');
+    $this->load->model('Socio');
+
+    if ($this->input->post('modificar')) {
+      $id = $this->input->post('id');
+      $usuario = $this->input->post('usuario');
+      
+      if ($this->reglas_modificar($id, $usuario) == TRUE) {
         $this->Socio->modificar($this->input->post());
+        $this->session->set_flashdata('mensaje',
+            'El socio se ha modificado correctamente');
         redirect('admin/socios/index');
         return;
-      } else {  
-  		  $this->load->view('admin/socios/modificar');
-		  }
-		  $id = $this->input->post('id');
-      $socio = $this->Socio->obtener_socios('id = ?', array($id));
-      $data = array('socio' => $socio[0]);
-      $this->load->view('admin/socios/modificarprimera', $data);
+      }
+    } else {
+      if ($id == null) {
+        redirect('admin/socios/index');
+        return;
+      }
+    }
+    
+    $socio = $this->Socio->obtener_socios('id = ?', array($id));
+    $data['socio'] = $socio[0];
+    $this->template->load('template', 'admin/socios/modificar', $data);
   }
   
  	function baja(){
@@ -94,14 +99,9 @@ class Socios extends CI_Controller {
  			$this->load->view('admin/socios/confirmar', $data);
 		}
   }
-
-	private function reglas_validacion() {
-    $reglas = array(  
-      array(
-        'field' => 'usuario',
-        'label' => 'Usuario',
-        'rules' => 'trim|required|is_unique[socios.usuario]'
-      ),
+  
+  private function reglas_comunes() {
+    $comunes = array(
       array(
         'field' => 'password',
         'label' => 'Contraseña',
@@ -131,9 +131,54 @@ class Socios extends CI_Controller {
       )
     );
     
+    return $comunes;
+  }
+  
+  private function reglas_insertar() {
+    $reglas = array(  
+      array(
+        'field' => 'usuario',
+        'label' => 'Usuario',
+        'rules' => "trim|required|is_unique[socios.usuario]"
+      )
+    );
+    
+    $comunes = $this->reglas_comunes();
+    
+    $reglas = array_merge($reglas, $comunes);
+    
     $this->load->library('form_validation');
     $this->form_validation->set_rules($reglas);
     return $this->form_validation->run();
   }
-	
+  
+  // REGLAS MODIFICAR
+  
+  private function reglas_modificar($id = null, $usuario = null) {
+    
+    $socio = $this->Socio->obtener_socios('usuario = ?', array($usuario));
+    if (!empty($socio)) {
+      $id_bd = $socio[0]['id'];
+      
+      $unique = ($id_bd != $id) ? '|is_unique[socios.usuario]' : '';
+    } else {
+      $unique = '|is_unique[socios.usuario]';
+    }
+    
+    $reglas = array(  
+      array(
+        'field' => 'usuario',
+        'label' => 'Usuario',
+        'rules' => "trim|required$unique"
+      )
+    );
+    
+    $comunes = $this->reglas_comunes();
+    
+    $reglas = array_merge($reglas, $comunes);
+    
+    $this->load->library('form_validation');
+    $this->form_validation->set_rules($reglas);
+    return $this->form_validation->run();
+  }
 }

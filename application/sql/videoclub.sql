@@ -18,20 +18,22 @@ create index idx_socios_usuario on socios (usuario);
 drop table peliculas cascade;
 
 create table peliculas (
-  id          bigserial    constraint pk_peliculas primary key,
-  titulo      varchar(100) not null,
-  precio      numeric(6,2) not null,
-  genero      varchar(20) ,
-  director    varchar(50),
-  duracion    numeric(3),
-  descripcion varchar (500),
-  anio        numeric(4) not null
+  id                  bigserial    constraint pk_peliculas primary key,
+  titulo              varchar(100) not null,
+  precio              numeric(6,2) not null,
+  genero              varchar(20) ,
+  director            varchar(50),
+  duracion            numeric(3),
+  descripcion         varchar (500),
+  anio                numeric(4) not null,
+  fecha_lanzamiento   date not null,
+  url_imagen          varchar(200) not null
 );
 
-insert into peliculas (titulo, precio, genero, director, duracion, descripcion, anio) 
-    values('El ataque de los tomates asesinos', 1, 'terror', 'Walter Simons', 95, 'Cuando los tomates cobran vida ...', 1979);
-  insert into peliculas (titulo, precio, genero, director, duracion, descripcion, anio) 
-    values('La bala que doblo la esquina', 8, 'western', 'Manolito Palotes', 145, 'Balas en contra de la fisica que ...', 1982);
+insert into peliculas (titulo, precio, genero, director, duracion, descripcion, anio, fecha_lanzamiento, url_imagen) 
+    values('El ataque de los tomates asesinos', 1, 'terror', 'Walter Simons', 95, 'Cuando los tomates cobran vida ...', 1978,'1978-05-12', 'http://adjuntos.estamosrodando.com/imagen/el-ataque-de-los-tomates-asesinos-147175.jpg');
+insert into peliculas (titulo, precio, genero, director, duracion, descripcion, anio, fecha_lanzamiento, url_imagen) 
+    values('La bala que doblo la esquina', 8, 'western', 'Manolito Palotes', 145, 'Balas en contra de la fisica que ...', 1982,'1982-09-06', 'http://2.bp.blogspot.com/-soKjoZAVVCg/UEo-Prd8auI/AAAAAAAADEQ/4HxFKiNFu7s/s1600/El+cartel+de+cine+en+el+Western+europeo.jpg');
 
 create index idx_peliculas_titulo on peliculas (titulo);
 create index idx_peliculas_anio on peliculas (anio);
