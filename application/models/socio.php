@@ -14,24 +14,17 @@ class Socio extends CI_Model {
 
   function modificar($datos){
     extract($datos);
-    $npassword = ($password != '') ? 'password = ?,' : '';
+    $npassword = ($password != '') ? 'password = ' : '';
     $password = ($password != '') ? md5($password) : '';
-    
-    /*var_dump($password);
-    var_dump($npassword);*/
+    $coma = ($password != '') ? ',' : '';
     
     $this->db->query("update socios
-                      set usuario = ?,
-                          $npassword
-                          email = ?,
-                          nombre = ?,
-                          telefono = ?
-                      where id = ?", array( $usuario, 
-                                            $password, 
-                                            $email, 
-                                            $nombre, 
-                                            $telefono,
-                                            $id));
+                      set usuario = '$usuario',
+                          $npassword '$password' $coma
+                          email = '$email',
+                          nombre = '$nombre',
+                          telefono = '$telefono'
+                      where id = $id");
 
 			return $this->db->affected_rows();
 	}
