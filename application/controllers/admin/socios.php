@@ -17,12 +17,35 @@ class Socios extends CI_Controller {
                       'nombre'    => 'Nombre',
                       'telefono'  => 'Teléfono');
                       
-    $usuario = 'usuario';
+    $descripcion = 'usuario';
     $res = $this->Socio->obtener_socios();
+    
+    if ($this->input->post('buscar')) {
+      $columna = $this->input->post('columna');
+      $criterio = $this->input->post('criterio');
+      $this->session->set_userdata('columna', $columna);
+      $this->session->set_userdata('criterio', $criterio);
+    } else if ($this->session->userdata('columna')) {
+      $columna = $this->session->userdata('columna');
+      $criterio = $this->session->userdata('criterio');
+    } else {
+      $columna = array_keys($columnas);
+      $columna = $columna[0];
+      $criterio = '';
+    }
+    
+    $cond = "upper(" . $this->db->escape_str($columna) . ") like ".
+            "upper('%" . $this->db->escape_str($criterio) . "%')";;
+    
+    if ($columna != '' && $criterio != '') {
+      $res = $this->Socio->obtener_socios($cond); 
+    }
        
-    $data = array('columnas'  => $columnas,
-                  'res'       => $res,
-                  'usuario'   => $usuario);
+    $data = array('columnas'    => $columnas,
+                  'res'         => $res,
+                  'descripcion' => $descripcion,
+                  'criterio'    => $criterio,
+                  'columna'     => $columna);
                       
     $this->template->load('template', 'admin/socios/index', $data);
   }
